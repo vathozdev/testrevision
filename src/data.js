@@ -1,15 +1,28 @@
 class Folder {
-    constructor(name) { 
-         this.name = name;
-         this.expenses = [];
-         this.id = crypto.randomUUID();
-    }}
+  constructor(name) {
+    this.name = name;
+    this.expenses = [];
+    this.id = crypto.randomUUID();
+  }
+}
 class Expense {
-    constructor(title, amount, category, date) {
-        this.title = title;
-        this.amount = amount;
-        this.category = category;
-        this.date = date;
-        this.id = crypto.randomUUID();
-    }
+  constructor(title, amount, category, date) {
+    this.title = title;
+    this.amount = amount;
+    this.category = category;
+    this.date = date;
+    this.id = crypto.randomUUID();
+  }
+}
+class FolderManager {
+  constructor() {
+    this.folders = [];
+  }
+  addFolder(folder) {
+    this.folders.push(folder);
+  };
+  removeFolder(id) {
+
+  };
+
 }
