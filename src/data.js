@@ -4,6 +4,16 @@ class Folder {
     this.expenses = [];
     this.id = crypto.randomUUID();
   }
+  addExpense(expense) {
+    this.expenses.push(expense);
+  }
+  removeExpense(expense) {
+    const index = this.expenses.findIndex((e) => e.id === expense.id);
+
+    if (index !== -1) {
+      this.expenses.splice(index, 1);
+    }
+  }
 }
 class Expense {
   constructor(title, amount, category, date) {
@@ -22,7 +32,8 @@ class FolderManager {
     this.folders.push(folder);
   }
   removeFolder(id) {
-    this.folders.findIndex((f) => f.id === id);
+    const index = this.folders.findIndex((f) => f.id === id);
+
     if (index !== -1) {
       this.folders.splice(index, 1);
     }
