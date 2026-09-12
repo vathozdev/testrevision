@@ -20,9 +20,11 @@ class FolderManager {
   }
   addFolder(folder) {
     this.folders.push(folder);
-  };
+  }
   removeFolder(id) {
-
-  };
-
+    this.folders.findIndex((f) => f.id === id);
+    if (index !== -1) {
+      this.folders.splice(index, 1);
+    }
+  }
 }
