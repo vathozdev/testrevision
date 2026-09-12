@@ -38,4 +38,7 @@ class FolderManager {
       this.folders.splice(index, 1);
     }
   }
+  getFolder(id) {
+    return this.folders.find((f) => f.id === id);
+  }
 }
