@@ -11,6 +11,9 @@ sideBar.appendChild(createFolderBtn);
 const list = document.createElement("ul");
 sideBar.appendChild(list);
 container.appendChild(sideBar);
+const mainArea = document.createElement("div");
+mainArea.classList.add("main-area");
+container.appendChild(mainArea);
 
 const folderManager = new FolderManager();
 
