@@ -24,6 +24,7 @@ form.classList.add("expense-form");
 const title = document.createElement("input");
 title.type = "text";
 title.placeholder = "Title";
+title.name = "title";
 form.appendChild(title);
 
 const amountContainer = document.createElement("div");
@@ -38,6 +39,7 @@ amount.type = "number";
 amount.placeholder = "0.00";
 amount.step = "0.01";
 amount.min = "0";
+amount.name = "amount";
 
 amountContainer.appendChild(currencySign);
 amountContainer.appendChild(amount);
