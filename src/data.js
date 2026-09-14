@@ -14,6 +14,7 @@ class Folder {
       this.expenses.splice(index, 1);
     }
   }
+  getExpense(id) { return this.expenses.find((e) => e.id === id); }
 }
 class Expense {
   constructor(title, amount, category, date) {
