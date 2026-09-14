@@ -1,3 +1,6 @@
+import { Folder, FolderManager } from "./data.js";
+
+console.log("DOM JS loaded");
 const container = document.querySelector(".container");
 const sideBar = document.createElement("div");
 sideBar.classList.add("side-bar");

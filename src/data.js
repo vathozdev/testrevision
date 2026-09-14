@@ -43,3 +43,5 @@ class FolderManager {
     return this.folders.find((f) => f.id === id);
   }
 }
+
+export { Folder, Expense, FolderManager };

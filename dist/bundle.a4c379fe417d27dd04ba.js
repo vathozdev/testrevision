@@ -1,2 +1,0 @@
-(()=>{"use strict";document.querySelector("#app").innerHTML=`\n    <ul>\n      ${["Webpack setup complete","Live-reloading enabled","Production bundle optimized"].map(e=>`<li>${e}</li>`).join("")}\n    </ul>\n  `})();
-//# sourceMappingURL=bundle.a4c379fe417d27dd04ba.js.map
