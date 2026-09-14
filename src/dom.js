@@ -65,14 +65,15 @@ categories.forEach((cat) => {
 });
 categoryContainer.appendChild(categoryLabel);
 categoryContainer.appendChild(categorySelect);
+form.appendChild(categoryContainer);
 
 
 const date = document.createElement("input");
 date.type = "date";
 date.name = "date";
+form.appendChild(date);
 
-
-
+mainArea.appendChild(form);
 container.appendChild(mainArea);
 
 addExpenseBtn.addEventListener("click", () => {
