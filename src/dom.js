@@ -18,4 +18,7 @@ createFolderBtn.addEventListener("click", () => {
     const folder = new Folder("New Folder")
     folderManager.addFolder(folder);
     console.log(folderManager.folders); //temporary 
+    const listItem = document.createElement("li");
+    listItem.textContent = folder.name;
+    list.appendChild(listItem);
 })
