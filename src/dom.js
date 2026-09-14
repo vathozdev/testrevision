@@ -6,5 +6,12 @@ createFolderBtn.classList.add("create-folder");
 createFolderBtn.textContent = "Create a new folder";
 sideBar.appendChild(createFolderBtn);
 const list = document.createElement("ul");
-sidebar.appendChild(list);
+sideBar.appendChild(list);
 container.appendChild(sideBar);
+
+const folderManager = new FolderManager();
+
+createFolderBtn.addEventListener("click", () => {
+    const folder = new Folder("New Folder")
+    folderManager.addFolder(folder);
+})
