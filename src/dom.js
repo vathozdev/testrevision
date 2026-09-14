@@ -45,6 +45,32 @@ amountContainer.appendChild(currencySign);
 amountContainer.appendChild(amount);
 form.appendChild(amountContainer);
 
+const categoryContainer = document.createElement("div");
+categoryContainer.classList.add("category-container");
+
+const categoryLabel = document.createElement("label");
+categoryLabel.textContent = "Category:";
+categoryLabel.setAttribute("for", "category");
+
+const categorySelect = document.createElement("select");
+categorySelect.name = "category";
+categorySelect.id = "category";
+
+const categories = ["Food", "Transport", "Entertainment", "Utilities", "Other", "Saving", "Health", "Education", "Shopping", "Travel", "Gifts", "Insurance", "Taxes", "Debt", "Investments"];
+categories.forEach((cat) => {
+  const option = document.createElement("option");
+  option.value = cat;
+  option.textContent = cat;
+  categorySelect.appendChild(option);
+});
+categoryContainer.appendChild(categoryLabel);
+categoryContainer.appendChild(categorySelect);
+
+
+const date = document.createElement("input");
+date.type = "date";
+date.name = "date";
+
 
 
 container.appendChild(mainArea);
