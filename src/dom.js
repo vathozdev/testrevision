@@ -15,10 +15,16 @@ container.appendChild(sideBar);
 const folderManager = new FolderManager();
 
 createFolderBtn.addEventListener("click", () => {
-    const folder = new Folder("New Folder")
-    folderManager.addFolder(folder);
-    console.log(folderManager.folders); //temporary 
-    const listItem = document.createElement("li");
-    listItem.textContent = folder.name;
-    list.appendChild(listItem);
-})
+  const folder = new Folder("New Folder");
+  folderManager.addFolder(folder);
+  console.log(folderManager.folders); //temporary
+  const listItem = document.createElement("li");
+
+  listItem.textContent = folder.name;
+  listItem.dataset.id = folder.id;
+  list.appendChild(listItem);
+});
+
+listItem.addEventListener("click", () => {
+  const clickedFolder = folderManager.getFolder(listItem.dataset.id);
+});
