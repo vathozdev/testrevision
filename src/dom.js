@@ -14,4 +14,5 @@ const folderManager = new FolderManager();
 createFolderBtn.addEventListener("click", () => {
     const folder = new Folder("New Folder")
     folderManager.addFolder(folder);
+    console.log(folderManager.folders); //temporary 
 })
