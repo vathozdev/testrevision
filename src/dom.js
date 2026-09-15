@@ -73,11 +73,12 @@ date.type = "date";
 date.name = "date";
 form.appendChild(date);
 
+form.style.display = "none"
 mainArea.appendChild(form);
 container.appendChild(mainArea);
 
 addExpenseBtn.addEventListener("click", () => {
-
+  form.style.display = "hidden"
 })
 
 const folderManager = new FolderManager();
