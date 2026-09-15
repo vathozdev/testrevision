@@ -90,6 +90,25 @@ form.addEventListener("submit", (event) => {
   const submittedForm = new Expense(title.value, amount.value, categorySelect.value, date.value);
   selectedFolder.addExpense(submittedForm);
   console.log(selectedFolder.expenses); //temporary
+  const expenseDiv = document.createElement("div");
+  const expenseTitle = document.createElement("div");
+  expenseTitle.textContent = submittedForm.title;
+  const expenseAmount = document.createElement("div");
+  expenseAmount.textContent = `$${submittedForm.amount}`;
+  const expenseCategory = document.createElement("div");
+  expenseCategory.textContent = submittedForm.category;
+  const expenseDate = document.createElement("div");
+  expenseDate.textContent = submittedForm.date;
+
+  expenseDiv.appendChild(expenseTitle);
+  expenseDiv.appendChild(expenseAmount);
+  expenseDiv.appendChild(expenseCategory);
+  expenseDiv.appendChild(expenseDate);
+
+  expensesContainer.appendChild(expenseDiv);
+
+  form.reset();
+  form.style.display = "none";
 });
 
 addExpenseBtn.addEventListener("click", () => {
