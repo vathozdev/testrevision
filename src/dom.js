@@ -73,6 +73,10 @@ date.type = "date";
 date.name = "date";
 form.appendChild(date);
 
+const submitBtn = document.createElement("button");
+submitBtn.classList.add("submit-btn");
+form.appendChild(submitBtn);
+
 form.style.display = "none"
 mainArea.appendChild(form);
 container.appendChild(mainArea);
