@@ -150,26 +150,24 @@ createFolderBtn.addEventListener("click", () => {
     if (selectedFolder) {
       expensesContainer.replaceChildren();
     }
-    selectedFolder.expenses.forEach(expense => {
- const expenseDiv = document.createElement("div");
- const expenseTitle = document.createElement("div");
- expenseTitle.textContent = expense.title;
- const expenseAmount = document.createElement("div");
- expenseAmount.textContent = `$${expense.amount}`;
- const expenseCategory = document.createElement("div");
- expenseCategory.textContent = expense.category;
- const expenseDate = document.createElement("div");
- expenseDate.textContent = expense.date;
+    selectedFolder.expenses.forEach((expense) => {
+      const expenseDiv = document.createElement("div");
+      const expenseTitle = document.createElement("div");
+      expenseTitle.textContent = expense.title;
+      const expenseAmount = document.createElement("div");
+      expenseAmount.textContent = `$${expense.amount}`;
+      const expenseCategory = document.createElement("div");
+      expenseCategory.textContent = expense.category;
+      const expenseDate = document.createElement("div");
+      expenseDate.textContent = expense.date;
 
- expenseDiv.appendChild(expenseTitle);
- expenseDiv.appendChild(expenseAmount);
- expenseDiv.appendChild(expenseCategory);
- expenseDiv.appendChild(expenseDate);
+      expenseDiv.appendChild(expenseTitle);
+      expenseDiv.appendChild(expenseAmount);
+      expenseDiv.appendChild(expenseCategory);
+      expenseDiv.appendChild(expenseDate);
 
- expensesContainer.appendChild(expenseDiv);
-});
-
-
+      expensesContainer.appendChild(expenseDiv);
+    });
   });
 
   listItem.textContent = folder.name;
@@ -177,3 +175,27 @@ createFolderBtn.addEventListener("click", () => {
   list.appendChild(listItem);
 });
 console.log(selectedFolder); //temporary
+
+listItem.addEventListener("dblclick", (e) => {
+  e.target.setAttribute("contentEditable", "true");
+  e.target.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      e.target.setAttribute("contentEditable", "false");
+      const folder = folderManager.getFolder(e.target.dataset.id);
+      if (folder) {
+        folder.name = e.target.textContent;
+      }
+    }
+  });
+  document.addEventListener("click", (e) => {
+    if (!listItem.contains(e.target)) {
+      e.preventDefault();
+      listItem.setAttribute("contentEditable", "false");
+            const folder = folderManager.getFolder(listItem.dataset.id);
+      if (folder) {
+        folder.name = listItem.textContent;
+      }
+    }
+  });
+});
