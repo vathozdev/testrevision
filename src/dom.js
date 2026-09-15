@@ -77,8 +77,11 @@ form.style.display = "none"
 mainArea.appendChild(form);
 container.appendChild(mainArea);
 
+let selectedFolder;
+
 form.addEventListener("submit", (event) => {
   const submittedForm = new Expense(title.value, amount.value, categorySelect.value, date.value);
+  selectedFolder.addExpense(submittedForm);
 });
 
 addExpenseBtn.addEventListener("click", () => {
@@ -92,12 +95,12 @@ createFolderBtn.addEventListener("click", () => {
   folderManager.addFolder(folder);
   console.log(folderManager.folders); //temporary
   const listItem = document.createElement("li");
+  listItem.addEventListener("click", () => {
+    selectedFolder = folderManager.getFolder(listItem.dataset.id);
+});
+
 
   listItem.textContent = folder.name;
   listItem.dataset.id = folder.id;
   list.appendChild(listItem);
-});
-
-listItem.addEventListener("click", () => {
-  const clickedFolder = folderManager.getFolder(listItem.dataset.id);
 });
