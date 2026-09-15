@@ -94,6 +94,6 @@ createFolderBtn.addEventListener("click", () => {
   list.appendChild(listItem);
 });
 
-//listItem.addEventListener("click", () => {
-  //const clickedFolder = folderManager.getFolder(listItem.dataset.id);
-//});
+listItem.addEventListener("click", () => {
+  const clickedFolder = folderManager.getFolder(listItem.dataset.id);
+});
