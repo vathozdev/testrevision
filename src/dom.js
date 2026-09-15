@@ -78,7 +78,7 @@ mainArea.appendChild(form);
 container.appendChild(mainArea);
 
 addExpenseBtn.addEventListener("click", () => {
-  form.style.display = "hidden"
+  form.style.display = "block"
 })
 
 const folderManager = new FolderManager();
