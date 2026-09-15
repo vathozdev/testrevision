@@ -77,6 +77,10 @@ form.style.display = "none"
 mainArea.appendChild(form);
 container.appendChild(mainArea);
 
+form.addEventListener("submit", (event) => {
+  const submittedForm = new Expense(title.value, amount.value, categorySelect.value, date.value);
+});
+
 addExpenseBtn.addEventListener("click", () => {
   form.style.display = "block"
 })
