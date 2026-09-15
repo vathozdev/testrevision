@@ -84,9 +84,10 @@ container.appendChild(mainArea);
 let selectedFolder;
 
 form.addEventListener("submit", (event) => {
-      event.preventDefault(); 
+  event.preventDefault(); 
   const submittedForm = new Expense(title.value, amount.value, categorySelect.value, date.value);
   selectedFolder.addExpense(submittedForm);
+  console.log(selectedFolder.expenses); //temporary
 });
 
 addExpenseBtn.addEventListener("click", () => {
@@ -102,6 +103,8 @@ createFolderBtn.addEventListener("click", () => {
   const listItem = document.createElement("li");
   listItem.addEventListener("click", () => {
     selectedFolder = folderManager.getFolder(listItem.dataset.id);
+    console.log(selectedFolder);
+
 });
 
 
@@ -109,3 +112,4 @@ createFolderBtn.addEventListener("click", () => {
   listItem.dataset.id = folder.id;
   list.appendChild(listItem);
 });
+console.log(selectedFolder); //temporary
