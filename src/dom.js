@@ -146,7 +146,7 @@ createFolderBtn.addEventListener("click", () => {
   listItem.addEventListener("click", () => {
     selectedFolder = folderManager.getFolder(listItem.dataset.id);
     addExpenseBtn.disabled = false;
-    console.log(selectedFolder);
+    console.log(selectedFolder); //temporary
     if (selectedFolder) {
       expensesContainer.replaceChildren();
     }
