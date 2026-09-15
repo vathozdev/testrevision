@@ -1,4 +1,4 @@
-import { Folder, FolderManager } from "./data.js";
+import { Folder, FolderManager, Expense } from "./data.js";
 
 console.log("DOM JS loaded"); //temporary
 const container = document.querySelector(".container");
@@ -84,6 +84,7 @@ container.appendChild(mainArea);
 let selectedFolder;
 
 form.addEventListener("submit", (event) => {
+      event.preventDefault(); 
   const submittedForm = new Expense(title.value, amount.value, categorySelect.value, date.value);
   selectedFolder.addExpense(submittedForm);
 });
