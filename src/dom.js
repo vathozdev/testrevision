@@ -170,12 +170,6 @@ createFolderBtn.addEventListener("click", () => {
     });
   });
 
-  listItem.textContent = folder.name;
-  listItem.dataset.id = folder.id;
-  list.appendChild(listItem);
-});
-console.log(selectedFolder); //temporary
-
 listItem.addEventListener("dblclick", (e) => {
   e.target.setAttribute("contentEditable", "true");
   e.target.addEventListener("keydown", (event) => {
@@ -199,3 +193,8 @@ listItem.addEventListener("dblclick", (e) => {
     }
   });
 });
+  listItem.textContent = folder.name;
+  listItem.dataset.id = folder.id;
+  list.appendChild(listItem);
+});
+console.log(selectedFolder); //temporary
