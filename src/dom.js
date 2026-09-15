@@ -17,6 +17,8 @@ mainArea.classList.add("main-area");
 const addExpenseBtn = document.createElement("button");
 addExpenseBtn.classList.add("expense-btn");
 addExpenseBtn.textContent = "Add Expense";
+const expensesContainer = document.createElement("div");
+mainArea.appendChild(expensesContainer);
 mainArea.appendChild(addExpenseBtn);
 
 const form = document.createElement("form");
