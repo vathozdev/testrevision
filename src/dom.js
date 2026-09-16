@@ -297,8 +297,9 @@ createFolderBtn.addEventListener("click", () => {
 
   const listItem = document.createElement("li");
 
-  listItem.textContent = folder.name;
-  listItem.dataset.id = folder.id;
+  const folderName = document.createElement("span");
+  folderName.textContent = folder.name;
+  folderName.dataset.id = folder.id;
 
   const removeFolderBtn = document.createElement("button");
   removeFolderBtn.classList.add("remove-btn");
@@ -320,11 +321,12 @@ createFolderBtn.addEventListener("click", () => {
     }
   });
 
+  listItem.appendChild(folderName);
   listItem.appendChild(removeFolderBtn);
   list.appendChild(listItem);
 
   listItem.addEventListener("click", () => {
-    selectedFolder = folderManager.getFolder(listItem.dataset.id);
+    selectedFolder = folderManager.getFolder(folderName.dataset.id);
 
     addExpenseBtn.disabled = false;
 
@@ -358,7 +360,7 @@ createFolderBtn.addEventListener("click", () => {
     });
   });
 
-  listItem.addEventListener("dblclick", (e) => {
+  folderName.addEventListener("dblclick", (e) => {
     e.target.setAttribute("contentEditable", "true");
 
     e.target.addEventListener("keydown", (event) => {
@@ -376,17 +378,15 @@ createFolderBtn.addEventListener("click", () => {
     });
 
     document.addEventListener("click", (e) => {
-      if (!listItem.contains(e.target)) {
-        listItem.setAttribute("contentEditable", "false");
+      if (!folderName.contains(e.target)) {
+        folderName.setAttribute("contentEditable", "false");
 
-        const folder = folderManager.getFolder(listItem.dataset.id);
+        const folder = folderManager.getFolder(folderName.dataset.id);
 
         if (folder) {
-          folder.name = listItem.textContent;
+          folder.name = folderName.textContent;
         }
       }
     });
   });
 });
-
-console.log(selectedFolder); // temporary
