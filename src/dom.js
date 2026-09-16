@@ -120,11 +120,72 @@ form.addEventListener("submit", (event) => {
   expenseCategory.textContent = submittedForm.category;
   const expenseDate = document.createElement("div");
   expenseDate.textContent = submittedForm.date;
+  const editExpenseBtn = document.createElement("button");
+  editExpenseBtn.classList.add("edit-btn");
+  editExpenseBtn.textContent = "Edit";
+
+  editExpenseBtn.addEventListener("click", () => {
+    const form = document.createElement("form");
+    const title = document.createElement("input");
+    title.type = "text";
+    title.name = "title";
+    title.textContent = submittedForm.title;
+    const amountContainer = document.createElement("div");
+amountContainer.classList.add("amount-container");
+
+const currencySign = document.createElement("span");
+currencySign.innerText = "$";
+currencySign.classList.add("currency-sign");
+
+const amount = document.createElement("input");
+amount.type = "number";
+amount.step = "0.01";
+amount.min = "0";
+amount.name = "amount";
+amount.value = submittedForm.amount;
+
+amountContainer.appendChild(currencySign);
+amountContainer.appendChild(amount);
+form.appendChild(amountContainer);
+
+const categoryContainer = document.createElement("div");
+categoryContainer.classList.add("category-container");
+
+const categoryLabel = document.createElement("label");
+categoryLabel.textContent = "Category:";
+categoryLabel.setAttribute("for", "category");
+
+const categorySelect = document.createElement("select");
+categorySelect.name = "category";
+categorySelect.id = "category";
+
+categories.forEach((cat) => {
+  const option = document.createElement("option");
+  option.value = cat;
+  option.textContent = cat;
+  if (cat === submittedForm.category) {
+    option.selected = true;
+  }
+  categorySelect.appendChild(option);
+});
+categoryContainer.appendChild(categoryLabel);
+categoryContainer.appendChild(categorySelect);
+form.appendChild(categoryContainer);
+
+const date = document.createElement("input");
+date.type = "date";
+date.name = "date";
+date.value = submittedForm.date;
+form.appendChild(date);
+
+
+  });
 
   expenseDiv.appendChild(expenseTitle);
   expenseDiv.appendChild(expenseAmount);
   expenseDiv.appendChild(expenseCategory);
   expenseDiv.appendChild(expenseDate);
+  expenseDiv.appendChild(editExpenseBtn);
 
   expensesContainer.appendChild(expenseDiv);
 
@@ -170,29 +231,29 @@ createFolderBtn.addEventListener("click", () => {
     });
   });
 
-listItem.addEventListener("dblclick", (e) => {
-  e.target.setAttribute("contentEditable", "true");
-  e.target.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      e.target.setAttribute("contentEditable", "false");
-      const folder = folderManager.getFolder(e.target.dataset.id);
-      if (folder) {
-        folder.name = e.target.textContent;
+  listItem.addEventListener("dblclick", (e) => {
+    e.target.setAttribute("contentEditable", "true");
+    e.target.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        e.target.setAttribute("contentEditable", "false");
+        const folder = folderManager.getFolder(e.target.dataset.id);
+        if (folder) {
+          folder.name = e.target.textContent;
+        }
       }
-    }
-  });
-  document.addEventListener("click", (e) => {
-    if (!listItem.contains(e.target)) {
-      e.preventDefault();
-      listItem.setAttribute("contentEditable", "false");
-            const folder = folderManager.getFolder(listItem.dataset.id);
-      if (folder) {
-        folder.name = listItem.textContent;
+    });
+    document.addEventListener("click", (e) => {
+      if (!listItem.contains(e.target)) {
+        e.preventDefault();
+        listItem.setAttribute("contentEditable", "false");
+        const folder = folderManager.getFolder(listItem.dataset.id);
+        if (folder) {
+          folder.name = listItem.textContent;
+        }
       }
-    }
+    });
   });
-});
   listItem.textContent = folder.name;
   listItem.dataset.id = folder.id;
   list.appendChild(listItem);
