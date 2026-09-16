@@ -186,7 +186,19 @@ form.addEventListener("submit", (event) => {
   expenseDiv.appendChild(editExpenseBtn);
 
   expensesContainer.appendChild(expenseDiv);
+  form.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      submittedForm.title = title.value;
+      submittedForm.amount = amount.value;
+      submittedForm.category = categorySelect.value;
+      submittedForm.date = date.value;
 
+expenseTitle.textContent = submittedForm.title;
+expenseAmount.textContent = `$${submittedForm.amount}`;
+expenseCategory.textContent = submittedForm.category;
+expenseDate.textContent = submittedForm.date;
+  }});
 });
 
 addExpenseBtn.addEventListener("click", () => {
@@ -230,8 +242,8 @@ createFolderBtn.addEventListener("click", () => {
   listItem.addEventListener("dblclick", (e) => {
     e.target.setAttribute("contentEditable", "true");
     e.target.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-          event.preventDefault();
+      if (event.key === "Enter") {
+        event.preventDefault();
         e.target.setAttribute("contentEditable", "false");
         const folder = folderManager.getFolder(e.target.dataset.id);
         if (folder) {
