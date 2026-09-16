@@ -130,6 +130,7 @@ form.addEventListener("submit", (event) => {
     title.type = "text";
     title.name = "title";
     title.value = submittedForm.title;
+    form.appendChild(title);
     const amountContainer = document.createElement("div");
     amountContainer.classList.add("amount-container");
 
@@ -187,6 +188,7 @@ form.addEventListener("submit", (event) => {
       submittedForm.amount = amount.value;
       submittedForm.category = categorySelect.value;
       submittedForm.date = date.value;
+      console.log(selectedFolder.expenses); //temporary
 
 expenseTitle.textContent = submittedForm.title;
 expenseAmount.textContent = `$${submittedForm.amount}`;
