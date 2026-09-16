@@ -127,7 +127,7 @@ form.addEventListener("submit", (event) => {
     date.value,
   );
 
-  selectedFolder.addExpense(submittedForm);
+  folderManager.addExpenseToFolder(selectedFolder.id, submittedForm);
 
   console.log(selectedFolder.expenses); // temporary
 
@@ -150,7 +150,7 @@ form.addEventListener("submit", (event) => {
   removeExpenseBtn.textContent = "X";
 
   removeExpenseBtn.addEventListener("click", () => {
-    selectedFolder.removeExpense(submittedForm);
+    folderManager.removeExpenseFromFolder(selectedFolder.id, submittedForm);
 
     console.log(selectedFolder.expenses); // temporary
 
