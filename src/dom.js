@@ -129,56 +129,54 @@ form.addEventListener("submit", (event) => {
     const title = document.createElement("input");
     title.type = "text";
     title.name = "title";
-    title.textContent = submittedForm.title;
+    title.value = submittedForm.title;
     const amountContainer = document.createElement("div");
-amountContainer.classList.add("amount-container");
+    amountContainer.classList.add("amount-container");
 
-const currencySign = document.createElement("span");
-currencySign.innerText = "$";
-currencySign.classList.add("currency-sign");
+    const currencySign = document.createElement("span");
+    currencySign.innerText = "$";
+    currencySign.classList.add("currency-sign");
 
-const amount = document.createElement("input");
-amount.type = "number";
-amount.step = "0.01";
-amount.min = "0";
-amount.name = "amount";
-amount.value = submittedForm.amount;
+    const amount = document.createElement("input");
+    amount.type = "number";
+    amount.step = "0.01";
+    amount.min = "0";
+    amount.name = "amount";
+    amount.value = submittedForm.amount;
 
-amountContainer.appendChild(currencySign);
-amountContainer.appendChild(amount);
-form.appendChild(amountContainer);
+    amountContainer.appendChild(currencySign);
+    amountContainer.appendChild(amount);
+    form.appendChild(amountContainer);
 
-const categoryContainer = document.createElement("div");
-categoryContainer.classList.add("category-container");
+    const categoryContainer = document.createElement("div");
+    categoryContainer.classList.add("category-container");
 
-const categoryLabel = document.createElement("label");
-categoryLabel.textContent = "Category:";
-categoryLabel.setAttribute("for", "category");
+    const categoryLabel = document.createElement("label");
+    categoryLabel.textContent = "Category:";
+    categoryLabel.setAttribute("for", "category");
 
-const categorySelect = document.createElement("select");
-categorySelect.name = "category";
-categorySelect.id = "category";
+    const categorySelect = document.createElement("select");
+    categorySelect.name = "category";
+    categorySelect.id = "category";
 
-categories.forEach((cat) => {
-  const option = document.createElement("option");
-  option.value = cat;
-  option.textContent = cat;
-  if (cat === submittedForm.category) {
-    option.selected = true;
-  }
-  categorySelect.appendChild(option);
-});
-categoryContainer.appendChild(categoryLabel);
-categoryContainer.appendChild(categorySelect);
-form.appendChild(categoryContainer);
+    categories.forEach((cat) => {
+      const option = document.createElement("option");
+      option.value = cat;
+      option.textContent = cat;
+      if (cat === submittedForm.category) {
+        option.selected = true;
+      }
+      categorySelect.appendChild(option);
+    });
+    categoryContainer.appendChild(categoryLabel);
+    categoryContainer.appendChild(categorySelect);
+    form.appendChild(categoryContainer);
 
-const date = document.createElement("input");
-date.type = "date";
-date.name = "date";
-date.value = submittedForm.date;
-form.appendChild(date);
-
-
+    const date = document.createElement("input");
+    date.type = "date";
+    date.name = "date";
+    date.value = submittedForm.date;
+    form.appendChild(date);
   });
 
   expenseDiv.appendChild(expenseTitle);
