@@ -147,7 +147,7 @@ form.addEventListener("submit", (event) => {
 
   const removeExpenseBtn = document.createElement("button");
   removeExpenseBtn.classList.add("remove-btn");
-  removeExpenseBtn.textContent = "Remove";
+  removeExpenseBtn.textContent = "X";
 
   removeExpenseBtn.addEventListener("click", () => {
     selectedFolder.removeExpense(submittedForm);
@@ -296,7 +296,25 @@ createFolderBtn.addEventListener("click", () => {
   console.log(folderManager.folders); // temporary
 
   const listItem = document.createElement("li");
+  const removeFolderBtn = document.createElement("button");
+  removeFolderBtn.classList.add("remove-btn");
+  removeFolderBtn.textContent = "X";
+  removeFolderBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
 
+    folderManager.removeFolder(folder.id);
+
+    console.log(folderManager.folders); // temporary
+
+    list.removeChild(listItem);
+
+    if (selectedFolder && selectedFolder.id === folder.id) {
+      selectedFolder = null;
+      addExpenseBtn.disabled = true;
+      expensesContainer.replaceChildren();
+    }});
+
+  listItem.appendChild(removeFolderBtn);
   listItem.addEventListener("click", () => {
     selectedFolder = folderManager.getFolder(listItem.dataset.id);
 
