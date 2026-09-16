@@ -287,6 +287,8 @@ addExpenseBtn.addEventListener("click", () => {
 });
 
 const folderManager = new FolderManager();
+folderManager.saveFolders();
+
 
 createFolderBtn.addEventListener("click", () => {
   const folder = new Folder("New Folder");

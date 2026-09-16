@@ -31,12 +31,14 @@ class FolderManager {
   }
   addFolder(folder) {
     this.folders.push(folder);
+    this.saveFolders();
   }
   removeFolder(id) {
     const index = this.folders.findIndex((f) => f.id === id);
 
     if (index !== -1) {
       this.folders.splice(index, 1);
+      this.saveFolders();
     }
   }
   getFolder(id) {
