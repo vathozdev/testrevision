@@ -187,8 +187,6 @@ form.addEventListener("submit", (event) => {
 
   expensesContainer.appendChild(expenseDiv);
 
-  form.reset();
-  form.style.display = "none";
 });
 
 addExpenseBtn.addEventListener("click", () => {
@@ -232,8 +230,8 @@ createFolderBtn.addEventListener("click", () => {
   listItem.addEventListener("dblclick", (e) => {
     e.target.setAttribute("contentEditable", "true");
     e.target.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
+        if (event.key === "Enter") {
+          event.preventDefault();
         e.target.setAttribute("contentEditable", "false");
         const folder = folderManager.getFolder(e.target.dataset.id);
         if (folder) {
