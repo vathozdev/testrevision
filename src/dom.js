@@ -296,9 +296,14 @@ createFolderBtn.addEventListener("click", () => {
   console.log(folderManager.folders); // temporary
 
   const listItem = document.createElement("li");
+
+  listItem.textContent = folder.name;
+  listItem.dataset.id = folder.id;
+
   const removeFolderBtn = document.createElement("button");
   removeFolderBtn.classList.add("remove-btn");
   removeFolderBtn.textContent = "X";
+
   removeFolderBtn.addEventListener("click", (e) => {
     e.stopPropagation();
 
@@ -312,9 +317,12 @@ createFolderBtn.addEventListener("click", () => {
       selectedFolder = null;
       addExpenseBtn.disabled = true;
       expensesContainer.replaceChildren();
-    }});
+    }
+  });
 
   listItem.appendChild(removeFolderBtn);
+  list.appendChild(listItem);
+
   listItem.addEventListener("click", () => {
     selectedFolder = folderManager.getFolder(listItem.dataset.id);
 
@@ -379,11 +387,6 @@ createFolderBtn.addEventListener("click", () => {
       }
     });
   });
-
-  listItem.textContent = folder.name;
-  listItem.dataset.id = folder.id;
-
-  list.appendChild(listItem);
 });
 
 console.log(selectedFolder); // temporary
