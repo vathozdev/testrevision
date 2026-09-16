@@ -125,6 +125,8 @@ form.addEventListener("submit", (event) => {
   editExpenseBtn.textContent = "Edit";
 
   editExpenseBtn.addEventListener("click", () => {
+    editExpenseBtn.disabled = true;
+    addExpenseBtn.disabled = true;
     const form = document.createElement("form");
     const title = document.createElement("input");
     title.type = "text";
@@ -194,7 +196,8 @@ expenseTitle.textContent = submittedForm.title;
 expenseAmount.textContent = `$${submittedForm.amount}`;
 expenseCategory.textContent = submittedForm.category;
 expenseDate.textContent = submittedForm.date;
-
+  editExpenseBtn.disabled = false;
+  addExpenseBtn.disabled = false;
   form.style.display = "none";
   }});
   });
