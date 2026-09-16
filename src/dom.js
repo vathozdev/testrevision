@@ -145,6 +145,20 @@ form.addEventListener("submit", (event) => {
   const expenseDate = document.createElement("div");
   expenseDate.textContent = submittedForm.date;
 
+  const removeExpenseBtn = document.createElement("button");
+  removeExpenseBtn.classList.add("remove-btn");
+  removeExpenseBtn.textContent = "Remove";
+
+  removeExpenseBtn.addEventListener("click", () => {
+    selectedFolder.removeExpense(submittedForm);
+
+    console.log(selectedFolder.expenses); // temporary
+
+    expensesContainer.removeChild(expenseDiv);
+  });
+
+  expenseDiv.appendChild(removeExpenseBtn);
+
   const editExpenseBtn = document.createElement("button");
   editExpenseBtn.classList.add("edit-btn");
   editExpenseBtn.textContent = "Edit";
