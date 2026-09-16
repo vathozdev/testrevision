@@ -177,16 +177,10 @@ form.addEventListener("submit", (event) => {
     date.name = "date";
     date.value = submittedForm.date;
     form.appendChild(date);
-  });
+    expenseDiv.appendChild(form);
+    form.style.display = "block";
 
-  expenseDiv.appendChild(expenseTitle);
-  expenseDiv.appendChild(expenseAmount);
-  expenseDiv.appendChild(expenseCategory);
-  expenseDiv.appendChild(expenseDate);
-  expenseDiv.appendChild(editExpenseBtn);
-
-  expensesContainer.appendChild(expenseDiv);
-  form.addEventListener("keydown", (event) => {
+      form.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
       submittedForm.title = title.value;
@@ -198,7 +192,20 @@ expenseTitle.textContent = submittedForm.title;
 expenseAmount.textContent = `$${submittedForm.amount}`;
 expenseCategory.textContent = submittedForm.category;
 expenseDate.textContent = submittedForm.date;
+
+  form.style.display = "none";
   }});
+  });
+
+  expenseDiv.appendChild(expenseTitle);
+  expenseDiv.appendChild(expenseAmount);
+  expenseDiv.appendChild(expenseCategory);
+  expenseDiv.appendChild(expenseDate);
+  expenseDiv.appendChild(editExpenseBtn);
+
+  expensesContainer.appendChild(expenseDiv);
+  form.reset();
+  form.style.display = "none";
 });
 
 addExpenseBtn.addEventListener("click", () => {
