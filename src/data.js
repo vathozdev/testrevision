@@ -42,6 +42,12 @@ class FolderManager {
   getFolder(id) {
     return this.folders.find((f) => f.id === id);
   }
+  saveFolders() {
+  const folders = JSON.stringify(this.folders);
+  localStorage.setItem("folders", folders);
 }
+}
+
+
 
 export { Folder, Expense, FolderManager };
