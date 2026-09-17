@@ -45,6 +45,7 @@ body {
 }
 
 .side-bar li {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -60,10 +61,58 @@ body {
 }
 
 .side-bar li span {
+  position: relative;
+  z-index: 1;
   flex: 1;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.side-bar .remove-btn {
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+}
+
+.side-bar li.active-folder {
+  background: #374151;
+  overflow: hidden;
+}
+
+.side-bar li.active-folder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #60a5fa,
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: folderFlow 2s linear infinite;
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  pointer-events: none;
+}
+
+@keyframes folderFlow {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
 }
 
 .main-area {
@@ -125,14 +174,18 @@ button:disabled {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  width: 100%;
 }
 
 .currency-sign {
+  flex-shrink: 0;
+  width: 1rem;
   font-weight: bold;
 }
 
 .amount-container input {
   flex: 1;
+  width: 0;
 }
 
 .category-container {
@@ -215,6 +268,9 @@ button:disabled {
   padding: 0.65rem;
   border: 1px solid #d1d5db;
   border-radius: 6px;
+}
+.side-bar .remove-btn {
+  margin-top: 0;
 }
 
 @media (max-width: 700px) {
