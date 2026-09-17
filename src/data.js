@@ -68,6 +68,10 @@ removeExpenseFromFolder(folderId, expense) {
 loadFolders() {
   const folders = JSON.parse(localStorage.getItem("folders"));
 
+  if (!folders) {
+    return;
+  }
+
   folders.forEach((savedFolder) => {
     const folder = new Folder(savedFolder.name);
     folder.id = savedFolder.id;
