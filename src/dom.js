@@ -117,6 +117,8 @@ container.appendChild(mainArea);
 
 let selectedFolder;
 
+const folderManager = new FolderManager();
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -150,14 +152,15 @@ form.addEventListener("submit", (event) => {
   removeExpenseBtn.textContent = "X";
 
   removeExpenseBtn.addEventListener("click", () => {
-    folderManager.removeExpenseFromFolder(selectedFolder.id, submittedForm);
+    folderManager.removeExpenseFromFolder(
+      selectedFolder.id,
+      submittedForm,
+    );
 
     console.log(selectedFolder.expenses); // temporary
 
     expensesContainer.removeChild(expenseDiv);
   });
-
-  expenseDiv.appendChild(removeExpenseBtn);
 
   const editExpenseBtn = document.createElement("button");
   editExpenseBtn.classList.add("edit-btn");
@@ -167,44 +170,43 @@ form.addEventListener("submit", (event) => {
     editExpenseBtn.disabled = true;
     addExpenseBtn.disabled = true;
 
-    const form = document.createElement("form");
+    const editForm = document.createElement("form");
 
-    const title = document.createElement("input");
-    title.type = "text";
-    title.name = "title";
-    title.value = submittedForm.title;
+    const editTitle = document.createElement("input");
+    editTitle.type = "text";
+    editTitle.name = "title";
+    editTitle.value = submittedForm.title;
 
-    form.appendChild(title);
+    editForm.appendChild(editTitle);
 
-    const amountContainer = document.createElement("div");
-    amountContainer.classList.add("amount-container");
+    const editAmountContainer = document.createElement("div");
+    editAmountContainer.classList.add("amount-container");
 
-    const currencySign = document.createElement("span");
-    currencySign.innerText = "$";
-    currencySign.classList.add("currency-sign");
+    const editCurrencySign = document.createElement("span");
+    editCurrencySign.innerText = "$";
+    editCurrencySign.classList.add("currency-sign");
 
-    const amount = document.createElement("input");
-    amount.type = "number";
-    amount.step = "0.01";
-    amount.min = "0";
-    amount.name = "amount";
-    amount.value = submittedForm.amount;
+    const editAmount = document.createElement("input");
+    editAmount.type = "number";
+    editAmount.step = "0.01";
+    editAmount.min = "0";
+    editAmount.name = "amount";
+    editAmount.value = submittedForm.amount;
 
-    amountContainer.appendChild(currencySign);
-    amountContainer.appendChild(amount);
+    editAmountContainer.appendChild(editCurrencySign);
+    editAmountContainer.appendChild(editAmount);
+    editForm.appendChild(editAmountContainer);
 
-    form.appendChild(amountContainer);
+    const editCategoryContainer = document.createElement("div");
+    editCategoryContainer.classList.add("category-container");
 
-    const categoryContainer = document.createElement("div");
-    categoryContainer.classList.add("category-container");
+    const editCategoryLabel = document.createElement("label");
+    editCategoryLabel.textContent = "Category:";
+    editCategoryLabel.setAttribute("for", "category");
 
-    const categoryLabel = document.createElement("label");
-    categoryLabel.textContent = "Category:";
-    categoryLabel.setAttribute("for", "category");
-
-    const categorySelect = document.createElement("select");
-    categorySelect.name = "category";
-    categorySelect.id = "category";
+    const editCategorySelect = document.createElement("select");
+    editCategorySelect.name = "category";
+    editCategorySelect.id = "category";
 
     categories.forEach((cat) => {
       const option = document.createElement("option");
@@ -215,55 +217,55 @@ form.addEventListener("submit", (event) => {
         option.selected = true;
       }
 
-      categorySelect.appendChild(option);
+      editCategorySelect.appendChild(option);
     });
 
-    categoryContainer.appendChild(categoryLabel);
-    categoryContainer.appendChild(categorySelect);
+    editCategoryContainer.appendChild(editCategoryLabel);
+    editCategoryContainer.appendChild(editCategorySelect);
+    editForm.appendChild(editCategoryContainer);
 
-    form.appendChild(categoryContainer);
+    const editDate = document.createElement("input");
+    editDate.type = "date";
+    editDate.name = "date";
+    editDate.value = submittedForm.date;
 
-    const date = document.createElement("input");
-    date.type = "date";
-    date.name = "date";
-    date.value = submittedForm.date;
+    editForm.appendChild(editDate);
 
-    form.appendChild(date);
+    expenseDiv.appendChild(editForm);
+    editForm.style.display = "block";
 
-    expenseDiv.appendChild(form);
+    const finishEditing = () => {
+      submittedForm.title = editTitle.value;
+      submittedForm.amount = editAmount.value;
+      submittedForm.category = editCategorySelect.value;
+      submittedForm.date = editDate.value;
 
-    form.style.display = "block";
+      expenseTitle.textContent = submittedForm.title;
+      expenseAmount.textContent = `$${submittedForm.amount}`;
+      expenseCategory.textContent = submittedForm.category;
+      expenseDate.textContent = submittedForm.date;
 
-    form.addEventListener("keydown", (event) => {
+      folderManager.saveFolders();
+
+      editExpenseBtn.disabled = false;
+      addExpenseBtn.disabled = false;
+
+      editForm.style.display = "none";
+    };
+
+    editForm.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         event.preventDefault();
-
-        submittedForm.title = title.value;
-        submittedForm.amount = amount.value;
-        submittedForm.category = categorySelect.value;
-        submittedForm.date = date.value;
-
-        console.log(selectedFolder.expenses); // temporary
-
-        expenseTitle.textContent = submittedForm.title;
-        expenseAmount.textContent = `$${submittedForm.amount}`;
-        expenseCategory.textContent = submittedForm.category;
-        expenseDate.textContent = submittedForm.date;
-
-        editExpenseBtn.disabled = false;
-        addExpenseBtn.disabled = false;
-
-        form.style.display = "none";
+        finishEditing();
       }
     });
 
     document.addEventListener("click", (e) => {
       if (
-        !form.contains(e.target) &&
+        !editForm.contains(e.target) &&
         !editExpenseBtn.contains(e.target)
       ) {
-        form.style.display = "none";
-
+        editForm.style.display = "none";
         editExpenseBtn.disabled = false;
         addExpenseBtn.disabled = false;
       }
@@ -274,6 +276,7 @@ form.addEventListener("submit", (event) => {
   expenseDiv.appendChild(expenseAmount);
   expenseDiv.appendChild(expenseCategory);
   expenseDiv.appendChild(expenseDate);
+  expenseDiv.appendChild(removeExpenseBtn);
   expenseDiv.appendChild(editExpenseBtn);
 
   expensesContainer.appendChild(expenseDiv);
@@ -286,16 +289,7 @@ addExpenseBtn.addEventListener("click", () => {
   form.style.display = "block";
 });
 
-const folderManager = new FolderManager();
-folderManager.loadFolders();
-
-createFolderBtn.addEventListener("click", () => {
-  const folder = new Folder("New Folder");
-
-  folderManager.addFolder(folder);
-
-  console.log(folderManager.folders); // temporary
-
+function renderFolder(folder) {
   const listItem = document.createElement("li");
 
   const folderName = document.createElement("span");
@@ -333,9 +327,7 @@ createFolderBtn.addEventListener("click", () => {
 
     console.log(selectedFolder); // temporary
 
-    if (selectedFolder) {
-      expensesContainer.replaceChildren();
-    }
+    expensesContainer.replaceChildren();
 
     selectedFolder.expenses.forEach((expense) => {
       const expenseDiv = document.createElement("div");
@@ -375,44 +367,43 @@ createFolderBtn.addEventListener("click", () => {
         editExpenseBtn.disabled = true;
         addExpenseBtn.disabled = true;
 
-        const form = document.createElement("form");
+        const editForm = document.createElement("form");
 
-        const title = document.createElement("input");
-        title.type = "text";
-        title.name = "title";
-        title.value = expense.title;
+        const editTitle = document.createElement("input");
+        editTitle.type = "text";
+        editTitle.name = "title";
+        editTitle.value = expense.title;
 
-        form.appendChild(title);
+        editForm.appendChild(editTitle);
 
-        const amountContainer = document.createElement("div");
-        amountContainer.classList.add("amount-container");
+        const editAmountContainer = document.createElement("div");
+        editAmountContainer.classList.add("amount-container");
 
-        const currencySign = document.createElement("span");
-        currencySign.innerText = "$";
-        currencySign.classList.add("currency-sign");
+        const editCurrencySign = document.createElement("span");
+        editCurrencySign.innerText = "$";
+        editCurrencySign.classList.add("currency-sign");
 
-        const amount = document.createElement("input");
-        amount.type = "number";
-        amount.step = "0.01";
-        amount.min = "0";
-        amount.name = "amount";
-        amount.value = expense.amount;
+        const editAmount = document.createElement("input");
+        editAmount.type = "number";
+        editAmount.step = "0.01";
+        editAmount.min = "0";
+        editAmount.name = "amount";
+        editAmount.value = expense.amount;
 
-        amountContainer.appendChild(currencySign);
-        amountContainer.appendChild(amount);
+        editAmountContainer.appendChild(editCurrencySign);
+        editAmountContainer.appendChild(editAmount);
+        editForm.appendChild(editAmountContainer);
 
-        form.appendChild(amountContainer);
+        const editCategoryContainer = document.createElement("div");
+        editCategoryContainer.classList.add("category-container");
 
-        const categoryContainer = document.createElement("div");
-        categoryContainer.classList.add("category-container");
+        const editCategoryLabel = document.createElement("label");
+        editCategoryLabel.textContent = "Category:";
+        editCategoryLabel.setAttribute("for", "category");
 
-        const categoryLabel = document.createElement("label");
-        categoryLabel.textContent = "Category:";
-        categoryLabel.setAttribute("for", "category");
-
-        const categorySelect = document.createElement("select");
-        categorySelect.name = "category";
-        categorySelect.id = "category";
+        const editCategorySelect = document.createElement("select");
+        editCategorySelect.name = "category";
+        editCategorySelect.id = "category";
 
         categories.forEach((cat) => {
           const option = document.createElement("option");
@@ -423,54 +414,55 @@ createFolderBtn.addEventListener("click", () => {
             option.selected = true;
           }
 
-          categorySelect.appendChild(option);
+          editCategorySelect.appendChild(option);
         });
 
-        categoryContainer.appendChild(categoryLabel);
-        categoryContainer.appendChild(categorySelect);
+        editCategoryContainer.appendChild(editCategoryLabel);
+        editCategoryContainer.appendChild(editCategorySelect);
+        editForm.appendChild(editCategoryContainer);
 
-        form.appendChild(categoryContainer);
+        const editDate = document.createElement("input");
+        editDate.type = "date";
+        editDate.name = "date";
+        editDate.value = expense.date;
 
-        const date = document.createElement("input");
-        date.type = "date";
-        date.name = "date";
-        date.value = expense.date;
+        editForm.appendChild(editDate);
 
-        form.appendChild(date);
+        expenseDiv.appendChild(editForm);
+        editForm.style.display = "block";
 
-        expenseDiv.appendChild(form);
+        const finishEditing = () => {
+          expense.title = editTitle.value;
+          expense.amount = editAmount.value;
+          expense.category = editCategorySelect.value;
+          expense.date = editDate.value;
 
-        form.style.display = "block";
+          expenseTitle.textContent = expense.title;
+          expenseAmount.textContent = `$${expense.amount}`;
+          expenseCategory.textContent = expense.category;
+          expenseDate.textContent = expense.date;
 
-        form.addEventListener("keydown", (event) => {
+          folderManager.saveFolders();
+
+          editExpenseBtn.disabled = false;
+          addExpenseBtn.disabled = false;
+
+          editForm.style.display = "none";
+        };
+
+        editForm.addEventListener("keydown", (event) => {
           if (event.key === "Enter") {
             event.preventDefault();
-
-            expense.title = title.value;
-            expense.amount = amount.value;
-            expense.category = categorySelect.value;
-            expense.date = date.value;
-
-            expenseTitle.textContent = expense.title;
-            expenseAmount.textContent = `$${expense.amount}`;
-            expenseCategory.textContent = expense.category;
-            expenseDate.textContent = expense.date;
-
-            folderManager.saveFolders();
-
-            editExpenseBtn.disabled = false;
-            addExpenseBtn.disabled = false;
-
-            form.style.display = "none";
+            finishEditing();
           }
         });
 
         document.addEventListener("click", (e) => {
           if (
-            !form.contains(e.target) &&
+            !editForm.contains(e.target) &&
             !editExpenseBtn.contains(e.target)
           ) {
-            form.style.display = "none";
+            editForm.style.display = "none";
             editExpenseBtn.disabled = false;
             addExpenseBtn.disabled = false;
           }
@@ -519,4 +511,22 @@ createFolderBtn.addEventListener("click", () => {
       }
     });
   });
+}
+
+createFolderBtn.addEventListener("click", () => {
+  const folder = new Folder("New Folder");
+
+  folderManager.addFolder(folder);
+
+  console.log(folderManager.folders); // temporary
+
+  renderFolder(folder);
 });
+
+folderManager.loadFolders();
+
+folderManager.folders.forEach((folder) => {
+  renderFolder(folder);
+});
+
+console.log(folderManager.folders); // temporary
