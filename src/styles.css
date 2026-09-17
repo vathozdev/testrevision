@@ -287,3 +287,10 @@ button:disabled {
     padding: 1rem;
   }
 }
+.expenses-container {
+  display: grid;
+  grid-template-rows: repeat(6, auto);
+  grid-auto-flow: column;
+  grid-auto-columns: 220px;
+  gap: 1rem;
+}
