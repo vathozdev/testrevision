@@ -320,16 +320,27 @@ function renderFolder(folder) {
   listItem.appendChild(removeFolderBtn);
   list.appendChild(listItem);
 
-  listItem.addEventListener("click", () => {
-    selectedFolder = folderManager.getFolder(folderName.dataset.id);
+listItem.addEventListener("click", () => {
+  document
+    .querySelectorAll(".active-folder")
+    .forEach((folder) => {
+      folder.classList.remove("active-folder");
+    });
 
-    addExpenseBtn.disabled = false;
+  listItem.classList.add("active-folder");
 
-    console.log(selectedFolder); // temporary
+  selectedFolder = folderManager.getFolder(folderName.dataset.id);
 
-    expensesContainer.replaceChildren();
+  addExpenseBtn.disabled = false;
 
-    selectedFolder.expenses.forEach((expense) => {
+  console.log(selectedFolder); // temporary
+
+  expensesContainer.replaceChildren();
+
+  selectedFolder.expenses.forEach((expense) => {
+   
+  });
+});
       const expenseDiv = document.createElement("div");
 
       const expenseTitle = document.createElement("div");
