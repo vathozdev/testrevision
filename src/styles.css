@@ -213,6 +213,7 @@ button:disabled {
 }
 
 .main-area > div > div {
+  max-width: 500px;
   padding: 1rem;
   margin-bottom: 1rem;
   background: white;
