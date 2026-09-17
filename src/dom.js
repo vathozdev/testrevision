@@ -107,6 +107,7 @@ form.appendChild(date);
 
 const submitBtn = document.createElement("button");
 submitBtn.classList.add("submit-btn");
+submitBtn.textContent ="✓ Add Expense";
 
 form.appendChild(submitBtn);
 
