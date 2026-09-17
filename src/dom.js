@@ -27,6 +27,7 @@ addExpenseBtn.textContent = "Add Expense";
 addExpenseBtn.disabled = true;
 
 const expensesContainer = document.createElement("div");
+expensesContainer.classList.add("expenses-container");
 
 mainArea.appendChild(expensesContainer);
 mainArea.appendChild(addExpenseBtn);
