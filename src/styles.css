@@ -289,7 +289,7 @@ button:disabled {
 }
 .expenses-container {
   display: grid;
-  grid-template-rows: repeat(6, auto);
+  grid-template-rows: repeat(5, auto);
   grid-auto-flow: column;
   grid-auto-columns: 220px;
   gap: 1rem;
