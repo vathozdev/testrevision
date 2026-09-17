@@ -65,6 +65,29 @@ removeExpenseFromFolder(folderId, expense) {
   const folders = JSON.stringify(this.folders);
   localStorage.setItem("folders", folders);
 }
+loadFolders() {
+  const folders = JSON.parse(localStorage.getItem("folders"));
+
+  folders.forEach((savedFolder) => {
+    const folder = new Folder(savedFolder.name);
+    folder.id = savedFolder.id;
+
+    savedFolder.expenses.forEach((savedExpense) => {
+      const expense = new Expense(
+        savedExpense.title,
+        savedExpense.amount,
+        savedExpense.category,
+        savedExpense.date,
+      );
+
+      expense.id = savedExpense.id;
+
+      folder.addExpense(expense);
+    });
+
+    this.folders.push(folder);
+  });
+}
 }
 
 
