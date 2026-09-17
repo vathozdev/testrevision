@@ -171,21 +171,21 @@ button:disabled {
 }
 
 .amount-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  position: relative;
   width: 100%;
 }
 
 .currency-sign {
-  flex-shrink: 0;
-  width: 1rem;
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
   font-weight: bold;
 }
 
 .amount-container input {
-  flex: 1;
-  width: 0;
+  width: 100%;
+  padding-left: 2rem;
 }
 
 .category-container {
