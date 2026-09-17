@@ -144,7 +144,7 @@ button:disabled {
 .expense-form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1rem;
   width: 100%;
   max-width: 500px;
   padding: 1.5rem;
@@ -187,18 +187,15 @@ button:disabled {
   width: 100%;
   padding-left: 2rem;
 }
-
 .category-container {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
-.category-container select {
-  width: 100%;
-  padding: 0.7rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 1rem;
-  background: white;
+.category-container label {
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .submit-btn {
@@ -257,7 +254,7 @@ button:disabled {
 .main-area form:not(.expense-form) {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 0.8rem;
   margin-top: 1rem;
   padding: 1rem;
   background: #f9fafb;

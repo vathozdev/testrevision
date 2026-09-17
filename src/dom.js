@@ -61,19 +61,14 @@ form.appendChild(amountContainer);
 
 const categoryContainer = document.createElement("div");
 categoryContainer.classList.add("category-container");
+
+const categoryLabel = document.createElement("label");
+categoryLabel.textContent = "Category:";
 categoryLabel.setAttribute("for", "category");
 
 const categorySelect = document.createElement("select");
 categorySelect.name = "category";
 categorySelect.id = "category";
-
-const categoryPlaceholder = document.createElement("option");
-categoryPlaceholder.textContent = "Category";
-categoryPlaceholder.value = "";
-categoryPlaceholder.disabled = true;
-categoryPlaceholder.selected = true;
-
-categorySelect.appendChild(categoryPlaceholder);
 
 const categories = [
   "Food",
